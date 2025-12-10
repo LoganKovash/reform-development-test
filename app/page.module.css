@@ -1,9 +1,10 @@
 .page {
-  --background: #fafafa;
+  --background: #FBFAF6;
   --foreground: #fff;
 
-  --text-primary: #000;
-  --text-secondary: #666;
+  --text-primary: #153E2A;
+  --text-secondary: #D87906;
+;
 
   --button-primary-hover: #383838;
   --button-secondary-hover: #f2f2f2;
@@ -11,131 +12,207 @@
 
   display: flex;
   min-height: 100vh;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  font-family: var(--font-geist-sans);
+  font-family: var(--font-soehne), sans-serif;
   background-color: var(--background);
+  text-align: center;
 }
 
-.main {
-  display: flex;
-  min-height: 100vh;
+.container {
   width: 100%;
-  max-width: 800px;
+  height: 100vh;
+  display: flex;
+  max-width: 1440px;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
-  background-color: var(--foreground);
-  padding: 120px 60px;
-}
-
-.intro {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  gap: 24px;
-}
-
-.intro h1 {
-  max-width: 320px;
-  font-size: 40px;
-  font-weight: 600;
-  line-height: 48px;
-  letter-spacing: -2.4px;
-  text-wrap: balance;
-  color: var(--text-primary);
-}
-
-.intro p {
-  max-width: 440px;
-  font-size: 18px;
-  line-height: 32px;
-  text-wrap: balance;
-  color: var(--text-secondary);
-}
-
-.intro a {
-  font-weight: 500;
-  color: var(--text-primary);
-}
-
-.ctas {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  max-width: 440px;
-  gap: 16px;
-  font-size: 14px;
-}
-
-.ctas a {
-  display: flex;
-  justify-content: center;
   align-items: center;
-  height: 40px;
-  padding: 0 16px;
-  border-radius: 128px;
-  border: 1px solid transparent;
-  transition: 0.2s;
-  cursor: pointer;
-  width: fit-content;
-  font-weight: 500;
+  gap: 0;
+  margin: 0 auto;
+  padding: 0;
 }
 
-a.primary {
-  background: var(--text-primary);
-  color: var(--background);
-  gap: 8px;
+.heading1 {
+  max-width: 1376px;
+  margin: 0;
+  font-size: 7.78vw;
+  font-family: var(--font-soehne), sans-serif;
+  font-weight: 400;
+  line-height: 100%;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  padding-top: 156px;
+  white-space: nowrap;
 }
 
-a.secondary {
-  border-color: var(--button-secondary-border);
+.doesnt {
+  display: inline-block;
 }
 
-/* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-  a.primary:hover {
-    background: var(--button-primary-hover);
-    border-color: transparent;
-  }
-
-  a.secondary:hover {
-    background: var(--button-secondary-hover);
-    border-color: transparent;
-  }
+.heading1NoPadding, .heading1NoPaddingHidden {
+  max-width: 1376px;
+  margin: 0;
+  font-size: 7.78vw;
+  font-family: var(--font-soehne), sans-serif;
+  font-weight: 400;
+  line-height: 120%;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  white-space: nowrap;
 }
 
-@media (max-width: 600px) {
-  .main {
-    padding: 48px 24px;
-  }
+.lineTwo {
+  display: flex;
+  align-items: center;
+  gap: 40px;
 
-  .intro {
-    gap: 16px;
-  }
-
-  .intro h1 {
-    font-size: 32px;
-    line-height: 40px;
-    letter-spacing: -1.92px;
+  .heading1NoPadding {
+    line-height: 90%;
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  .logo {
-    filter: invert();
+.heading1Mobile, .heading1MobileNoPadding {
+  display: none;
+}
+
+.tabletBreak {
+  display: none;
+}
+
+/* Desktop >1440px — content fixed at 1440, gutters added */
+@media (min-width: 1441px) {
+
+  .container {
+    max-width: 1440px;
   }
 
-  .page {
-    --background: #000;
-    --foreground: #000;
+  .heading1, .heading1NoPadding, .heading1NoPaddingHidden {
+    font-size: 112px;
+    max-width: 1376px;
+  }
 
-    --text-primary: #ededed;
-    --text-secondary: #999;
+  .bottom {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: flex-end;
+    padding: 0 32px;
+    padding-bottom: 32px;
+  }
+}
 
-    --button-primary-hover: #ccc;
-    --button-secondary-hover: #1a1a1a;
-    --button-secondary-border: #1a1a1a;
+/* Desktop 1025–1440px — scale from 1440px */
+@media (max-width: 1440px) and (min-width: 1025px) {
+  .heading1, .heading1NoPadding, .heading1NoPaddingHidden {
+    font-size: 7.78vw;
+  }
+
+  .bottom {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: flex-end;
+    padding: 0 32px;
+    padding-bottom: 32px;
+  }
+}
+
+/* Tablet 501–1024px — scale from 1024px */
+@media (max-width: 1024px) and (min-width: 501px) {
+  .heading1 {
+    padding-top: 260px;
+  }
+
+  .heading1, .heading1NoPadding, .heading1NoPaddingHidden {
+    font-size: 10.95vw;
+  }
+  
+
+  .tabletBreak {
+    display: block;
+  }
+
+  .bottom {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: flex-end;
+    padding: 0 32px;
+    padding-bottom: 32px;
+  }
+
+  .lineTwo {
+    gap: 10px;
+  }
+}
+
+/* Mobile ≤500px — scale from 375px */
+@media (max-width: 500px) {
+  .container {
+    max-width: 343px;
+  }
+
+  .heading1, .heading1NoPaddingHidden {
+    display: none;
+  }
+
+  .lineTwo {
+    display: block; /* <- stack them so wrapping works */
+    text-align: center;
+  }
+
+  .heading1NoPadding {
+    display: inline;     /* combine into one flowing line */
+    white-space: normal; /* allow wrapping */
+  }
+
+  .lineTwo > * {
+    display: inline;
+  }
+
+  /* Remove gap so it doesn’t force a break */
+  .lineTwo {
+    gap: 0;
+  }
+
+  .heading1Mobile, .heading1MobileNoPadding {
+    display: flex;
+    flex-direction: column;
+    padding-top: 141px;
+    max-width: 1376px;
+    margin: 0;
+    font-size: 12.80vw;
+    font-family: var(--font-soehne), sans-serif;
+    font-weight: 400;
+    line-height: 120%;
+    color: var(--text-primary);
+    letter-spacing: -0.03em;
+    padding-top: 0;
+  }
+
+  .heading1Mobile {
+    padding-top: 94px;
+  }
+
+  .heading1, .heading1NoPadding {
+    font-size: 12.80vw;
+    max-width: 343px;
+    height: auto;
+  }
+
+  .tabletBreak {
+    display: block;
+  }
+
+  .heading1NoPaddingHidden {
+    display: none;
+  }
+
+  .bottom {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 0 0 24px 0;
   }
 }

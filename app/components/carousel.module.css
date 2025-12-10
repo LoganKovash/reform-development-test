@@ -1,0 +1,63 @@
+.carousel {
+  width: 687px;
+  height: 328px;
+  padding: 32px 0;
+  border: 1px solid #CCDDC7;
+  /* position: absolute;
+  top: 440px;
+  left: 720px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.track {
+  position: relative;
+  display: flex;
+  gap: 80px; /* adjust as needed */
+  will-change: transform;
+}
+
+.carousel-card {
+  flex: 0 0 auto;    /* prevent shrinking or growing */
+  margin-right: 20px; /* optional spacing between cards */
+  transform-origin: center center; /* for scaling effect */
+}
+
+.carousel-card img {
+  display: block;
+  object-fit: cover;
+}
+
+/* Desktop >1440px — content fixed at 1440, gutters added */
+@media (min-width: 1441px) {
+
+  
+}
+
+/* Desktop 1025–1440px — scale from 1440px */
+@media (max-width: 1440px) and (min-width: 1025px) {
+  .carousel {
+    max-width: 687px;
+    width: 47.87vw;
+  }
+}
+
+/* Tablet 501–1024px — scale from 1024px */
+@media (max-width: 1024px) and (min-width: 501px) {
+  .carousel {
+    height: 600px;
+    max-width: 557px;
+    width: 54.394vw;
+  }
+}
+
+/* Mobile ≤500px — scale from 375px */
+@media (max-width: 500px) {
+  .carousel {
+    height: 190px;
+    max-width: 327px;
+    width: 87.2vw
+  }
+}

@@ -1,0 +1,108 @@
+.container {
+    width: 689px;
+    height: 328px;
+    padding: 32px;
+    border: 1px solid #CCDDC7;
+    /* position: absolute;
+    top: 440px;
+    left: 32px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.text {
+    max-width: 500px;
+    width: 500px;
+    height: 119px;
+}
+
+.text .bodyL{
+    letter-spacing: -0.03em;
+    line-height: 140%;
+    color: #153E2A;
+    text-align: left;
+}
+
+/* Desktop >1440px — content fixed at 1440, gutters added */
+@media (min-width: 1441px) {
+    .text .bodyL{
+        font-size: 24px; /* Stop scaling */
+    }
+  
+  
+}
+
+/* Desktop 1025–1440px — scale from 1440px */
+@media (max-width: 1440px) and (min-width: 1025px) {
+    .container {
+        max-width: 689px;
+        width: 47.87vw;
+    }
+
+    .text {
+        max-width: 500px;
+        width: 35vw;
+    }
+
+    .text .bodyL{
+        letter-spacing: -0.03em;
+        line-height: 140%;
+        color: #153E2A;
+        text-align: left;
+        font-size: clamp(18px, 1.666vw + 0.64rem, 1.7vw)
+    }
+
+    .break {
+        display: none;
+    }
+}
+
+/* Tablet 501–1024px — scale from 1024px */
+@media (max-width: 1024px) and (min-width: 501px) {
+    .container {
+        height: 600px;
+        max-width: 403px;
+        width: 47.87vw;
+    }
+
+    .text {
+        max-width: 339px;
+        width: 35vw;
+    }
+
+    .text .bodyL{
+        letter-spacing: -0.03em;
+        line-height: 140%;
+        color: #153E2A;
+        text-align: left;
+        font-size: clamp(24px, 1.666vw + 0.64rem, 1.7vw)
+    }
+
+    .break {
+        display: none;
+    }
+}
+
+/* Mobile ≤500px — scale from 375px */
+@media (max-width: 500px) {
+    .container {
+        height: 206px;
+        max-width: 327px;
+        width: 87.2vw;
+        padding: 20px;
+    }
+
+    .text {
+        max-width: 287px;
+        width: 76.54vw;
+    }
+
+    .text .bodyL{
+        letter-spacing: -0.03em;
+        line-height: 140%;
+        color: #153E2A;
+        text-align: left;
+        font-size: clamp(14px, 1.666vw + 0.64rem, 1.7vw)
+    }
+}

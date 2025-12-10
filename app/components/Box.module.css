@@ -1,0 +1,74 @@
+.box {
+  width: 662px;
+  height: 79px;
+  padding: 24px 32px;
+  margin-top: 25px;
+  border-radius: 16px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  font-family: var(--font-soehne), sans-serif;
+  font-size: 24px;
+  color: #153E2A;
+  border: 1px solid #CCDDC7;
+}
+
+.marqueeWrapper {
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+
+.marqueeContent {
+  display: inline-flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  text-align: center;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.icon {
+  width: 16px;
+}
+
+/* Desktop >1440px — content fixed at 1440, gutters added */
+@media (min-width: 1441px) {
+
+}
+
+/* Desktop 1025–1440px — scale from 1440px */
+@media (max-width: 1440px) and (min-width: 1025px) {
+  
+}
+
+/* Tablet 501–1024px — scale from 1024px */
+@media (max-width: 1024px) and (min-width: 501px) {
+  .box {
+    width: 307px;
+    height: 79px;
+  }
+}
+
+/* Mobile ≤500px — scale from 375px */
+@media (max-width: 500px) {
+  .box {
+    width: 327px;
+    height: 62px;
+    margin: 5px 0;
+  }
+}

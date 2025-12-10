@@ -1,66 +1,103 @@
-import Image from "next/image";
+"use client";
+
 import styles from "./page.module.css";
+import gsap from "gsap";
+import { useEffect, useRef } from "react";
+import Box from "./components/Box";
+import InfoBox from "./components/infoBox";
+import Carousel from "./components/Carousel";
+import ButtonGroup from "./components/ButtonGroup";
+import ArrowRight from "./components/ArrowRight";
+
 
 export default function Home() {
+  const leftTextRef = useRef<HTMLHeadingElement | null>(null);
+  const rightTextMainRef = useRef<HTMLHeadingElement | null>(null);
+  const rightTextSecondaryRef = useRef<HTMLHeadingElement | null>(null);
+  const headingTextRef = useRef<HTMLHeadingElement | null>(null);
+  const doesntRef = useRef<HTMLSpanElement | null>(null);
+  const boxRef = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+      gsap.set([leftTextRef.current, rightTextMainRef.current, doesntRef.current], {
+        skewX: 0,
+      });
+
+      const tl = gsap.timeline({
+        delay: 0.82, defaults: { duration: 2.92, ease: "cubic-bezier(0.7, 0, 1, 1)" }
+      });
+
+      tl.to(leftTextRef.current, {
+        x: 362,      // move slightly right
+      })
+        .to(
+          rightTextMainRef.current,
+          {
+            x: -350,  // move slightly left
+          },
+          "<"       // start at same time
+        )
+        .to(
+          boxRef.current,
+          {
+            scale: 0,
+            opacity: 0,
+          },
+          "<"     // overlap so it shrinks as the words move
+        )
+
+        .to(
+          [leftTextRef.current, rightTextMainRef.current],
+          {
+            color: "#00b684",
+            duration: 1.05,
+            skewX: -15,
+            ease: "power1.inOut",
+            
+          }
+        )
+
+        .to(
+          doesntRef.current,
+          {
+            color: "#00b684",
+            duration: 1.05,
+            skewX: -15,
+            ease: "none",
+            
+          },
+          "<" // start at same time as the previous animation
+        );
+            }, []);
+
   return (
     <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+      <div className={styles.container}>
+        <h1 className={styles.heading1}>
+          Health insurance <br className={styles.tabletBreak} />that <span ref={doesntRef} className={styles.doesnt}>doesn&apos;t</span>
+        </h1>
+        <h1 className={styles.heading1Mobile}>
+          Health insurance that doesn&apos;t get
+        </h1>
+        <div className={styles.lineTwo}>
+          <h1 className={styles.heading1NoPaddingHidden} ref={leftTextRef}>get in </h1> 
+          <Box ref={boxRef}> </Box>
+          <h1 className={styles.heading1NoPaddingHidden} ref={rightTextMainRef}>the way.</h1>
+          <h1 className={styles.heading1MobileNoPadding} ref={rightTextSecondaryRef}>in the way.</h1>
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+        <div className={styles.bottom}>
+          <InfoBox>
+            <ButtonGroup
+              leftLabel="Get a Custom Quote Today"
+              rightIcon={<ArrowRight />}
+              onLeftClick={() => console.log("Left clicked")}
+              onRightClick={() => console.log("Right clicked")}
             />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          </InfoBox>
+          <Carousel>
+          </Carousel>
         </div>
-      </main>
+      </div>
     </div>
   );
 }

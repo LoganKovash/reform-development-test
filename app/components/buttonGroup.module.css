@@ -1,0 +1,98 @@
+.group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.leftButton {
+  width: 227px;
+  height: 50px;
+  border-radius: 25px;
+  border: 0.75px solid #30715D;
+  font-family: var(--font-soehne), sans-serif;
+  cursor: pointer;
+  font-size: 16px;
+  letter-spacing: -0.03em;
+  background: #FBFAF6;
+  color: #30715D;
+  position: relative;
+  z-index: 10;
+}
+
+/* .rightButton {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  border: 0.75px solid #30715D;
+  cursor: pointer;
+  background: #FBFAF6;
+  color: #30715D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
+
+.rightButton {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  background: #FBFAF6; /* button background */
+  color: #30715D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+
+  svg {
+    z-index: 10;
+  }
+}
+
+.rightButton .border {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  background: conic-gradient(#30715D 100deg 315deg, #FBFAF6 300deg 360deg);
+  z-index: 1;
+  transform: rotate(-40deg);
+}
+
+.rightButton::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  --border-color: #30715D;
+  background: conic-gradient(
+    var(--border-color) 100deg 315deg,   /* visible part of the border */
+    #FBFAF6 300deg 360deg  /* the open/gap part = button background color */
+  );
+  z-index: 0;
+  transform: rotate(-40deg); /* rotates the gap to a different position */
+}
+
+/* Inner “cut-out” circle */
+.rightButton::after {
+  content: "";
+  position: absolute;
+  inset: 0.75px; /* border thickness */
+  border-radius: 50%;
+  background: #FBFAF6; /* same as button background */
+  z-index: 1;
+}
+
+.iconWrapper {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  will-change: transform;
+}
+
+
+
+
