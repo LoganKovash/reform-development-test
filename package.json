@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "netlify-build": "next build"
   },
   "dependencies": {
     "gsap": "^3.13.0",
@@ -15,6 +16,7 @@
     "react-dom": "19.2.0"
   },
   "devDependencies": {
+    "@netlify/plugin-nextjs": "^5.15.1",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
