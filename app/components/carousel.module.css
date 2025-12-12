@@ -56,7 +56,6 @@
 @media (max-width: 500px) {
   .carousel {
     height: 190px;
-    max-width: 327px;
     width: 87.2vw;
     justify-content: space-around;
   }

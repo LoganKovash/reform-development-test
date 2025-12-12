@@ -55,13 +55,23 @@ const Carousel = forwardRef<HTMLDivElement>(function Carousel(_, ref) {
         // -------------------------
         if (desktop) {
           const step = 475;
-          const initialOffset = -1750;
-
-          gsap.set(track, { x: initialOffset });
+          // const initialOffset = -1750;
 
           const originals = cards.slice(clonesA.length, clonesA.length + IMAGES.length);
 
+          // Width calculations
+          const container = internalRef.current;
+          const firstCard = originals[0];
+          const cardWidth = firstCard.offsetWidth;
+          const containerCenter = container.offsetWidth / 2;
           const initialCenterCard = originals[0];
+          const trackRect = track.getBoundingClientRect();
+          const firstCardRect = firstCard.getBoundingClientRect();
+          const firstCardCenter = firstCardRect.left - trackRect.left + cardWidth / 2;
+
+          const initialOffset = containerCenter - firstCardCenter;
+
+          gsap.set(track, { x: initialOffset });
 
           gsap.set(initialCenterCard, { scale: scaleUp }); // start scaled up
 
@@ -126,15 +136,25 @@ const Carousel = forwardRef<HTMLDivElement>(function Carousel(_, ref) {
         // -------------------------
         if (mobile) {
           const step = 242;
-          const initialOffset = -905;
-
-          gsap.set(track, { x: initialOffset });
 
           const originals = cards.slice(clonesA.length, clonesA.length + IMAGES.length);
 
+          // Width calculations
+          const container = internalRef.current;
+          const firstCard = originals[0];
+          const cardWidth = firstCard.offsetWidth;
+          const containerCenter = container.offsetWidth / 2;
           const initialCenterCard = originals[0];
+          const trackRect = track.getBoundingClientRect();
+          const firstCardRect = firstCard.getBoundingClientRect();
+          const firstCardCenter = firstCardRect.left - trackRect.left + cardWidth / 2;
+
+          const initialOffset = containerCenter - firstCardCenter;
+
+          gsap.set(track, { x: initialOffset });
 
           gsap.set(initialCenterCard, { scale: scaleUp });
+          
 
           originals.forEach((card, i) => {
             const nextX = initialOffset + i * step;
@@ -151,7 +171,6 @@ const Carousel = forwardRef<HTMLDivElement>(function Carousel(_, ref) {
 
             if(i === originals.length - 1) {
               tl.to(track, { x: 65, duration: moveDuration, ease: "power4.inOut" });
-              // tl.to(clonesA[0], { scale: scaleUp, duration: 2.5, ease: "power4.inOut" }, "+=0.1");
             }
           });
 

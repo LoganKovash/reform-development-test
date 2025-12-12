@@ -150,9 +150,7 @@
 
 /* Mobile ≤500px — scale from 375px */
 @media (max-width: 500px) {
-  .container {
-    max-width: 343px;
-  }
+
 
   .heading1, .heading1NoPaddingHidden {
     display: none;
