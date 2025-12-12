@@ -88,10 +88,10 @@ export default function Home() {
           // TABLET ANIMATION
           // -------------------------
           if (tablet) {
-            tl.to(leftTextRef.current, { x: 160, ease: "power4.inOut" })      // smaller move
+            tl.to(leftTextRef.current, { x: 155, ease: "power4.inOut" })      // smaller move
               .to(rightTextMainRef.current, { x: -150, ease: "power4.inOut" }, "<")
               .to(boxRef.current, { scale: 0, ease: "power4.inOut" }, "<")
-              .to(boxRef.current, { borderRadius: "30%", ease: "power4.inOut" }, "+1")
+              .to(boxRef.current, { borderRadius: "30%", ease: "power4.inOut" }, "+=1")
               .to(
                 [leftTextRef.current, rightTextMainRef.current],
                 { color: "#00b684", duration: 1, skewX: -8 }, "-=2"
@@ -107,12 +107,13 @@ export default function Home() {
           // MOBILE ANIMATION
           // -------------------------
           if (mobile) {
-            tl.to(leftTextRefMobile.current, { y: 70 })      // even smaller move
-              .to(rightTextRefMobile.current, { y: -5 }, "<")
-              .to(boxRef.current, { y: 35, scale: 0, opacity: 0 }, "<")
+            tl.to(leftTextRefMobile.current, { y: 70, ease: "power4.inOut" })      // even smaller move
+              .to(rightTextRefMobile.current, { y: -5, ease: "power4.inOut" }, "<")
+              .to(boxRef.current, { y: 35, scale: 0, ease: "power4.inOut" }, "<")
+              .to(boxRef.current, { borderRadius: "30%", ease: "power4.inOut" }, "+=1")
               .to(
                 rightTextRefMobile.current,
-                { color: "#00b684", duration: 0.9, skewX: -6 },
+                { color: "#00b684", duration: 0.9, skewX: -6 }, "-=5"
               )
               .to(
                 doesntRefMobile.current,
@@ -132,17 +133,19 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <div className={styles.container}>
-        <h1 className={styles.heading1}>
-          Health insurance <br className={styles.tabletBreak} />that <span ref={doesntRef} className={styles.doesnt}>doesn&apos;t</span>
-        </h1>
-        <h1 className={styles.heading1Mobile} ref={leftTextRefMobile}>
-          Health insurance<br /> that <span ref={doesntRefMobile} className={styles.doesnt}>doesn&apos;t get</span><br />
-        </h1>
-        <div className={styles.lineTwo}>
-          <h1 className={styles.heading1NoPaddingHidden} ref={leftTextRef}>get in </h1> 
-          <Box ref={boxRef}> </Box>
-          <h1 className={styles.heading1NoPaddingHidden} ref={rightTextMainRef}>the way.</h1>
-          <h1 className={styles.heading1MobileNoPadding} ref={rightTextRefMobile}>in the way.</h1>
+        <div>
+          <h1 className={styles.heading1}>
+            Health insurance <br className={styles.tabletBreak} />that <span ref={doesntRef} className={styles.doesnt}>doesn&apos;t</span>
+          </h1>
+          <h1 className={styles.heading1Mobile} ref={leftTextRefMobile}>
+            Health insurance<br /> that <span ref={doesntRefMobile} className={styles.doesnt}>doesn&apos;t get</span><br />
+          </h1>
+          <div className={styles.lineTwo}>
+            <h1 className={styles.heading1NoPaddingHidden} ref={leftTextRef}>get in </h1> 
+            <Box ref={boxRef}> </Box>
+            <h1 className={styles.heading1NoPaddingHidden} ref={rightTextMainRef}>the way.</h1>
+            <h1 className={styles.heading1MobileNoPadding} ref={rightTextRefMobile}>in the way.</h1>
+          </div>
         </div>
         <div className={styles.bottom}>
           <InfoBox>

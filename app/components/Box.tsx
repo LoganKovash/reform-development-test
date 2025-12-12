@@ -36,7 +36,6 @@ const Box = forwardRef<HTMLDivElement, { children?: ReactNode }>(
           let xEnd = 80;
           let startOffset = 0;
 
-          // Customize settings per breakpoint
           if (desktop) {
             duration = 20;
             xStart = -40;
@@ -48,9 +47,9 @@ const Box = forwardRef<HTMLDivElement, { children?: ReactNode }>(
             xEnd = -30;
             startOffset = -36.05;
           } else if (mobile) {
-            duration = 10;
-            xStart = -80;
-            xEnd = 40;
+            duration = 2;
+            xStart = -50;
+            xEnd = -40;
             startOffset = -43;
           }
 

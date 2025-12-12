@@ -61,14 +61,22 @@ const Carousel = forwardRef<HTMLDivElement>(function Carousel(_, ref) {
 
           const originals = cards.slice(clonesA.length, clonesA.length + IMAGES.length);
 
+          const initialCenterCard = originals[0];
+
+          gsap.set(initialCenterCard, { scale: scaleUp }); // start scaled up
+
           originals.forEach((card, i) => {
             const nextX = initialOffset + i * step;
 
-            tl.to(track, { x: nextX, duration: moveDuration });
+            tl.to(track, { x: nextX, duration: moveDuration, ease: "power4.inOut" }, "-=1");
 
             const centerCard = cards[clonesA.length - i];
-            tl.to(centerCard, { scale: scaleUp, duration: 0.9 }, "+=0.1");
-            tl.to(centerCard, { scale: 1, duration: 0.9 }, `+=${pause}`);
+            if (i === 0) {
+              tl.to(centerCard, { scale: 1, duration: 1, ease: "power4.inOut" }, "-=0.5");
+            } else {
+              tl.to(centerCard, { scale: scaleUp, duration: 1.5, ease: "power4.inOut" }, "+=0.1");
+              tl.to(centerCard, { scale: 1, duration: 1.5, ease: "power4.inOut" }, `+=${pause}`);
+            }
           });
 
           tl.set(track, { x: initialOffset, duration: moveDuration });
@@ -85,14 +93,29 @@ const Carousel = forwardRef<HTMLDivElement>(function Carousel(_, ref) {
 
           const originals = cards.slice(clonesA.length, clonesA.length + IMAGES.length);
 
+          const initialCenterCard = originals[0];
+
+          gsap.set(initialCenterCard, { scale: scaleUp });
+
           originals.forEach((card, i) => {
             const nextX = initialOffset + i * step;
 
-            tl.to(track, { y: nextX, duration: moveDuration });
+            tl.to(track, { y: nextX, duration: moveDuration, ease: "power4.inOut" }, "-=1");
 
             const centerCard = cards[clonesA.length - i];
-            tl.to(centerCard, { scale: scaleUp, duration: 0.9 }, "+=0.1");
-            tl.to(centerCard, { scale: 1, duration: 0.9 }, `+=${pause}`);
+            if(i === 0) {
+              tl.to(centerCard, { scale: 1, duration: 1, ease: "power4.inOut" }, "-=0.5");
+            } else {
+              tl.to(centerCard, { scale: scaleUp, duration: 1.5, ease: "power4.inOut" }, "+=0.1");
+              tl.to(centerCard, { scale: 1, duration: 1.5, ease: "power4.inOut" }, `+=${pause}`);
+            }
+
+            console.log(nextX)
+
+            if(i === originals.length - 1) {
+              tl.to(track, { y: 1500, duration: moveDuration, ease: "power4.inOut" });
+              tl.to(clonesA[0], { scale: scaleUp, duration: 1.5, ease: "power4.inOut" }, "+=0.1");
+            }
           });
 
           tl.set(track, { y: initialOffset, duration: moveDuration });
@@ -109,21 +132,30 @@ const Carousel = forwardRef<HTMLDivElement>(function Carousel(_, ref) {
 
           const originals = cards.slice(clonesA.length, clonesA.length + IMAGES.length);
 
+          const initialCenterCard = originals[0];
+
+          gsap.set(initialCenterCard, { scale: scaleUp });
+
           originals.forEach((card, i) => {
             const nextX = initialOffset + i * step;
 
-            tl.to(track, { x: nextX, duration: moveDuration });
+            tl.to(track, { x: nextX, duration: moveDuration, ease: "power4.inOut" }, "-=1");
 
             const centerCard = cards[clonesA.length - i];
-            tl.to(centerCard, { scale: scaleUp, duration: 0.9 }, "+=0.1");
-            tl.to(centerCard, { scale: 1, duration: 0.9 }, `+=${pause}`);
+            if(i === 0) {
+              tl.to(centerCard, { scale: 1, duration: 1, ease: "power4.inOut" }, "-=0.5");
+            } else {
+              tl.to(centerCard, { scale: scaleUp, duration: 1.5, ease: "power4.inOut" }, "+=0.1");
+              tl.to(centerCard, { scale: 1, duration: 1.5, ease: "power4.inOut" }, `+=${pause}`);
+            }
 
             if(i === originals.length - 1) {
-              tl.to(track, { x: 65, duration: moveDuration });
+              tl.to(track, { x: 65, duration: moveDuration, ease: "power4.inOut" });
+              // tl.to(clonesA[0], { scale: scaleUp, duration: 2.5, ease: "power4.inOut" }, "+=0.1");
             }
           });
 
-          tl.set(track, { x: initialOffset, duration: moveDuration });
+          tl.set(track, { x: initialOffset, duration: moveDuration, ease: "power4.inOut" }, "-=1");
         }
 
 

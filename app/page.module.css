@@ -42,7 +42,7 @@
   line-height: 100%;
   color: var(--text-primary);
   letter-spacing: -0.03em;
-  padding-top: 156px;
+  padding-top: 110px;
   white-space: nowrap;
 }
 
@@ -121,7 +121,7 @@
 /* Tablet 501–1024px — scale from 1024px */
 @media (max-width: 1024px) and (min-width: 501px) {
   .heading1 {
-    padding-top: 260px;
+    padding-top: 12vh;
   }
 
   .heading1, .heading1NoPadding, .heading1NoPaddingHidden {
@@ -134,12 +134,13 @@
   }
 
   .bottom {
+    position: absolute;
+    bottom: 32px;
     display: flex;
     width: 100%;
-    height: 100%;
+    height: fit-content;
     align-items: flex-end;
     padding: 0 32px;
-    padding-bottom: 32px;
   }
 
   .lineTwo {
@@ -174,6 +175,9 @@
   /* Remove gap so it doesn’t force a break */
   .lineTwo {
     gap: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .heading1Mobile, .heading1MobileNoPadding {
@@ -196,7 +200,7 @@
     width: 100vw;
     white-space: normal;
     line-height: 120%;
-    padding-top: 94px;
+    padding-top: 5vh;
   }
 
   .doesnt {
@@ -219,10 +223,11 @@
 
   .bottom {
     display: flex;
+    position: absolute;
+    bottom: 24px;
     flex-direction: column-reverse;
     align-items: center;
     width: 100%;
-    height: 100%;
-    padding: 0 0 24px 0;
+    height: fit-content;
   }
 }
