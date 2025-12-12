@@ -103,7 +103,7 @@ export default function Home() {
               .to(boxRef.current, { borderRadius: "30%", ease: "power4.inOut" }, "+=1")
               .to(
                 [leftTextRef.current, rightTextMainRef.current],
-                { color: "#00b684", duration: 1, skewX: -8 }, "-=2"
+                { color: "#00b684", duration: 1, skewX: -8 }, "-=4.5"
               )
               .to(
                 doesntRef.current,
