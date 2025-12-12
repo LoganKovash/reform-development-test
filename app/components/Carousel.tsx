@@ -11,11 +11,30 @@ const IMAGES = [
   { src: "/images/card1.png", w: 394.4, h: 195.2, id: 1 },
 ];
 
+/**
+ * Carousel Component
+ * 
+ * A fully responsive GSAP-powered looping carousel with
+ * unique animations for desktop, tablet, and mobile breakpoints.
+ *
+ * Key Features:
+ * - Infinite looping created via mirrored clones (prepend + append)
+ * - Automatically centers the initial card based on container width
+ * - Independent animation timelines per breakpoint using GSAP MatchMedia
+ * - Smooth scaling transition on the "center" card during scroll
+ */
+
 const Carousel = forwardRef<HTMLDivElement>(function Carousel(_, ref) {
+
+  // Track container (moves horizontally/vertically depending on breakpoint)
   const trackRef = useRef<HTMLDivElement>(null);
+
+  // Outer wrapper used for width/center calculation
   const internalRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
+
+    // Match responsive breakpoints and register unique animations for each
     const mm = gsap.matchMedia();
 
     mm.add(
@@ -30,7 +49,7 @@ const Carousel = forwardRef<HTMLDivElement>(function Carousel(_, ref) {
 
         if (!track) return;
 
-        // Reset any transforms
+        // Fully clear any previously applied transforms (prevents stacking between breakpoint changes)
         gsap.set(track.children, { clearProps: "all" });
         gsap.set(track, { clearProps: "all" });
 
@@ -62,6 +81,8 @@ const Carousel = forwardRef<HTMLDivElement>(function Carousel(_, ref) {
           // const initialOffset = -1750;
 
           const originals = cards.slice(clonesA.length, clonesA.length + IMAGES.length);
+
+          console.log("Thanks for reviewing my site!")
 
           // Width calculations
           const container = internalRef.current;
@@ -140,8 +161,6 @@ const Carousel = forwardRef<HTMLDivElement>(function Carousel(_, ref) {
               tl.to(centerCard, { scale: scaleUp, duration: 1.5, ease: "power4.inOut" }, "+=0.1");
               tl.to(centerCard, { scale: 1, duration: 1.5, ease: "power4.inOut" }, `+=${pause}`);
             }
-
-            console.log(nextX)
 
             if(i === originals.length - 1) {
               tl.to(track, { y: initialOffset + step * (originals.length - 1), duration: moveDuration, ease: "power4.inOut" }, "-=1.5");

@@ -11,13 +11,22 @@ import ArrowRight from "./components/ArrowRight";
 
 
 export default function Home() {
+
+  // ---------- TEXT & ELEMENT REFS ----------
+  // These references point to heading elements that animate differently on desktop/tablet/mobile.
   const leftTextRef = useRef<HTMLHeadingElement | null>(null);
   const rightTextMainRef = useRef<HTMLHeadingElement | null>(null);
+
+  // Mobile-specific heading refs
   const rightTextRefMobile = useRef<HTMLHeadingElement | null>(null);
   const leftTextRefMobile = useRef<HTMLHeadingElement | null>(null);
+
+  // Highlighted “doesn’t” span (desktop + mobile)
   const headingTextRef = useRef<HTMLHeadingElement | null>(null);
   const doesntRef = useRef<HTMLSpanElement | null>(null);
   const doesntRefMobile = useRef<HTMLSpanElement | null>(null);
+
+  // Animated box between “get in” & “the way”
   const boxRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {

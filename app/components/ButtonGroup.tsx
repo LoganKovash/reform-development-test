@@ -157,7 +157,6 @@ const handleRightRelease = () => {};
         className={styles.border}
       />
 
-      {/* Wrap icon so we can animate it independently */}
       <span ref={rightIconRef} className={styles.iconWrapper}>
         {rightIcon}
       </span>
