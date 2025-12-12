@@ -2,6 +2,7 @@
 
 import styles from "./carousel.module.css";
 import { forwardRef, useRef, useLayoutEffect } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 
 const IMAGES = [
@@ -13,67 +14,131 @@ const IMAGES = [
 
 const Carousel = forwardRef<HTMLDivElement>(function Carousel(_, ref) {
   const trackRef = useRef<HTMLDivElement>(null);
+  const internalRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      let cards = gsap.utils.toArray<HTMLDivElement>(
-        ".carousel-card",
-        trackRef.current
-      );
-      if (!cards.length) return;
+    const mm = gsap.matchMedia();
 
-      const step = 475;       // horizontal distance each card moves
-      const scaleUp = 1.3;    // scale factor when centered
-      const moveDuration = 2.71;
-      const pause = 0.5;
+    mm.add(
+      {
+        desktop: "(min-width: 1025px)",
+        tablet: "(min-width: 501px) and (max-width: 1024px)",
+        mobile: "(max-width: 500px)"
+      },
+      (context) => {
+        const { desktop, tablet, mobile } = context.conditions!;
+        const track = trackRef.current;
 
-      // 1. Clone cards for seamless looping
-      const clonesBefore = cards.map(c => c.cloneNode(true) as HTMLElement);
-      trackRef.current!.prepend(...clonesBefore);
+        if (!track) return;
 
-      const clonesAfter = cards.map(c => c.cloneNode(true) as HTMLElement);
-      trackRef.current!.append(...clonesAfter);
+        // Reset any transforms
+        gsap.set(track.children, { clearProps: "all" });
+        gsap.set(track, { clearProps: "all" });
 
-      // 2. Recompute full cards list (clones + originals)
-      cards = gsap.utils.toArray<HTMLDivElement>(".carousel-card", trackRef.current);
+        // Clone cards for looping
+        let cards = gsap.utils.toArray<HTMLElement>(".carousel-card", track);
+        const clonesA = cards.map((c) => c.cloneNode(true) as HTMLElement);
+        const clonesB = cards.map((c) => c.cloneNode(true) as HTMLElement);
+        track.prepend(...clonesA);
+        track.append(...clonesB);
 
-      // 3. Position track so first original card starts off left
-      const initialOffset = -1750; // account for prepended clones
-      console.log("Initial offset is:", initialOffset, cards.length)
-      gsap.set(trackRef.current, { x: initialOffset });
+        cards = gsap.utils.toArray<HTMLElement>(".carousel-card", track);
 
-      const firstCard = cards[clonesBefore.length]; // first original card
-      gsap.set(firstCard, { scale: scaleUp });  
+        const scaleUp = 1.3;
+        const moveDuration = 2.7;
+        const pause = 0.5;
 
-      // 4. Build timeline
-      const tl = gsap.timeline({ repeat: -1, defaults: { ease: "power2.out" } });
+        const tl = gsap.timeline({ repeat: -1, defaults: { ease: "power2.out" } });
 
-      const originalCards = cards.slice(clonesBefore.length, clonesBefore.length + IMAGES.length);
+        // -------------------------
+        // DESKTOP ANIMATION
+        // -------------------------
+        if (desktop) {
+          const step = 475;
+          const initialOffset = -1750;
 
-      originalCards.forEach((card, i) => {
-        const nextX = initialOffset + i * step;
-        // Positive X moves track right → cards appear from left
+          gsap.set(track, { x: initialOffset });
 
-        tl.to(trackRef.current, { x: nextX, duration: moveDuration, ease: "power4.out" });
+          const originals = cards.slice(clonesA.length, clonesA.length + IMAGES.length);
 
-        const centerCard = cards[clonesBefore.length - i];
+          originals.forEach((card, i) => {
+            const nextX = initialOffset + i * step;
 
-        // Scale current card up as it centers
-        tl.to(centerCard, { scale: scaleUp, duration: 0.9, ease: "cubic-bezier(0.8, 0, 0.2, 1)" }, "+=0.1");
+            tl.to(track, { x: nextX, duration: moveDuration });
 
-        // Scale back down before next card
-        tl.to(centerCard, { scale: 1, duration: 0.9, ease: "cubic-bezier(0.8, 0, 0.2, 1)" }, `+=${pause}`);
-      });
-      // 6. Optional: smooth reset
-      tl.set(trackRef.current, { x: initialOffset, duration: 1.71, ease: "power4.out" });
+            const centerCard = cards[clonesA.length - i];
+            tl.to(centerCard, { scale: scaleUp, duration: 0.9 }, "+=0.1");
+            tl.to(centerCard, { scale: 1, duration: 0.9 }, `+=${pause}`);
+          });
 
-    });
+          tl.set(track, { x: initialOffset, duration: moveDuration });
+        }
 
-    return () => ctx.revert();
+        // -------------------------
+        // TABLET ANIMATION
+        // -------------------------
+        if (tablet) {
+          const step = 275;
+          const initialOffset = 400;
+
+          gsap.set(track, { y: initialOffset });
+
+          const originals = cards.slice(clonesA.length, clonesA.length + IMAGES.length);
+
+          originals.forEach((card, i) => {
+            const nextX = initialOffset + i * step;
+
+            tl.to(track, { y: nextX, duration: moveDuration });
+
+            const centerCard = cards[clonesA.length - i];
+            tl.to(centerCard, { scale: scaleUp, duration: 0.9 }, "+=0.1");
+            tl.to(centerCard, { scale: 1, duration: 0.9 }, `+=${pause}`);
+          });
+
+          tl.set(track, { y: initialOffset, duration: moveDuration });
+        }
+
+        // -------------------------
+        // MOBILE ANIMATION
+        // -------------------------
+        if (mobile) {
+          const step = 242;
+          const initialOffset = -905;
+
+          gsap.set(track, { x: initialOffset });
+
+          const originals = cards.slice(clonesA.length, clonesA.length + IMAGES.length);
+
+          originals.forEach((card, i) => {
+            const nextX = initialOffset + i * step;
+
+            tl.to(track, { x: nextX, duration: moveDuration });
+
+            const centerCard = cards[clonesA.length - i];
+            tl.to(centerCard, { scale: scaleUp, duration: 0.9 }, "+=0.1");
+            tl.to(centerCard, { scale: 1, duration: 0.9 }, `+=${pause}`);
+
+            if(i === originals.length - 1) {
+              tl.to(track, { x: 65, duration: moveDuration });
+            }
+          });
+
+          tl.set(track, { x: initialOffset, duration: moveDuration });
+        }
+
+
+
+        return () => {
+          tl.kill();
+        };
+      }
+    );
+
+    return () => mm.revert();
   }, []);
 
   return (
-    <div className={styles.carousel} ref={ref}>
+    <div className={styles.carousel} ref={internalRef}>
       <div className={styles.track} ref={trackRef}>
         {IMAGES.map((img, i) => (
           <div
@@ -81,7 +146,7 @@ const Carousel = forwardRef<HTMLDivElement>(function Carousel(_, ref) {
             className="carousel-card"
             style={{ width: img.w, height: img.h }}
           >
-            <img src={img.src} width={img.w} height={img.h} alt="" />
+            <Image src={img.src} width={img.w} height={img.h} alt="" className={styles.carouselImage}/>
           </div>
         ))}
       </div>

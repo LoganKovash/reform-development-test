@@ -19,13 +19,7 @@
   will-change: transform;
 }
 
-.carousel-card {
-  flex: 0 0 auto;    /* prevent shrinking or growing */
-  margin-right: 20px; /* optional spacing between cards */
-  transform-origin: center center; /* for scaling effect */
-}
-
-.carousel-card img {
+.carouselImage {
   display: block;
   object-fit: cover;
 }
@@ -51,6 +45,11 @@
     max-width: 557px;
     width: 54.394vw;
   }
+
+  .track {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 /* Mobile ≤500px — scale from 375px */
@@ -58,6 +57,23 @@
   .carousel {
     height: 190px;
     max-width: 327px;
-    width: 87.2vw
+    width: 87.2vw;
+    justify-content: space-around;
+  }
+
+  .track {
+    gap: 45px;
+  }
+
+  .track .carousel-card{
+    display: flex;
+    align-items: center;
+    width: auto !important;
+    height: 100% !important;
+  }
+
+  .carouselImage {
+    width: 197.1999969482422px;
+    height: 97.5999984741211px;
   }
 }

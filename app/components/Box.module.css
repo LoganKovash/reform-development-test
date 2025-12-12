@@ -1,7 +1,6 @@
 .box {
   width: 662px;
   height: 79px;
-  padding: 24px 32px;
   margin-top: 25px;
   border-radius: 16px;
   background: white;
@@ -26,6 +25,8 @@
 .marqueeContent {
   display: inline-flex;
   align-items: center;
+  letter-spacing: 0.04em;
+  line-height: 130%;
   gap: 30px;
 }
 
@@ -48,7 +49,9 @@
 
 /* Desktop >1440px — content fixed at 1440, gutters added */
 @media (min-width: 1441px) {
-
+  .box {
+    padding: 35px 0;
+  }
 }
 
 /* Desktop 1025–1440px — scale from 1440px */
@@ -70,5 +73,6 @@
     width: 327px;
     height: 62px;
     margin: 5px 0;
+    padding: 24px 0;
   }
 }

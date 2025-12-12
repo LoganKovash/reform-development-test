@@ -17,6 +17,8 @@
   font-family: var(--font-soehne), sans-serif;
   background-color: var(--background);
   text-align: center;
+  width: 100%;
+  height: 100%;
 }
 
 .container {
@@ -190,7 +192,15 @@
   }
 
   .heading1Mobile {
+    display: block;
+    width: 100vw;
+    white-space: normal;
+    line-height: 120%;
     padding-top: 94px;
+  }
+
+  .doesnt {
+    display: inline-block;
   }
 
   .heading1, .heading1NoPadding {
