@@ -61,6 +61,7 @@ const Carousel = forwardRef<HTMLDivElement>(function Carousel(_, ref) {
 
           // Width calculations
           const container = internalRef.current;
+          if (!container) return;
           const firstCard = originals[0];
           const cardWidth = firstCard.offsetWidth;
           const containerCenter = container.offsetWidth / 2;
@@ -130,7 +131,6 @@ const Carousel = forwardRef<HTMLDivElement>(function Carousel(_, ref) {
 
           tl.set(track, { y: initialOffset, duration: moveDuration });
         }
-
         // -------------------------
         // MOBILE ANIMATION
         // -------------------------
@@ -141,6 +141,7 @@ const Carousel = forwardRef<HTMLDivElement>(function Carousel(_, ref) {
 
           // Width calculations
           const container = internalRef.current;
+          if (!container) return;
           const firstCard = originals[0];
           const cardWidth = firstCard.offsetWidth;
           const containerCenter = container.offsetWidth / 2;
