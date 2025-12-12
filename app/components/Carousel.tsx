@@ -1,4 +1,3 @@
-"use client";
 
 import styles from "./carousel.module.css";
 import { forwardRef, useRef, useLayoutEffect } from "react";
@@ -39,6 +38,11 @@ const Carousel = forwardRef<HTMLDivElement>(function Carousel(_, ref) {
         let cards = gsap.utils.toArray<HTMLElement>(".carousel-card", track);
         const clonesA = cards.map((c) => c.cloneNode(true) as HTMLElement);
         const clonesB = cards.map((c) => c.cloneNode(true) as HTMLElement);
+        clonesA.push(cards[0].cloneNode(true) as HTMLElement);
+        clonesA.push(cards[1].cloneNode(true) as HTMLElement);
+        clonesA.push(cards[2].cloneNode(true) as HTMLElement);
+        clonesA.push(cards[3].cloneNode(true) as HTMLElement);
+        // clonesA.push(cards[1].cloneNode(true) as HTMLElement);
         track.prepend(...clonesA);
         track.append(...clonesB);
 
@@ -90,7 +94,23 @@ const Carousel = forwardRef<HTMLDivElement>(function Carousel(_, ref) {
             }
           });
 
-          tl.set(track, { x: initialOffset, duration: moveDuration });
+          tl.to(track, {
+            x: initialOffset + step * (originals.length - 1),
+            duration: moveDuration,
+            ease: "power4.inOut"
+          }, "-=1.5");
+
+          // extra move into the FIRST CLONE
+          tl.to(track, {
+            x: initialOffset + step * originals.length,
+            duration: moveDuration,
+            ease: "power4.inOut"
+          }, "-=1.5");
+
+          tl.to(clonesA[4], { scale: scaleUp, duration: 2, ease: "power4.inOut" }, "-=0.5");
+
+          // instant jump to the beginning
+          tl.set(track, { x: initialOffset });
         }
 
         // -------------------------
@@ -98,11 +118,11 @@ const Carousel = forwardRef<HTMLDivElement>(function Carousel(_, ref) {
         // -------------------------
         if (tablet) {
           const step = 275;
-          const initialOffset = 400;
-
-          gsap.set(track, { y: initialOffset });
+          const initialOffset = -100;
 
           const originals = cards.slice(clonesA.length, clonesA.length + IMAGES.length);
+          gsap.set(track, { y: initialOffset });
+
 
           const initialCenterCard = originals[0];
 
@@ -124,12 +144,13 @@ const Carousel = forwardRef<HTMLDivElement>(function Carousel(_, ref) {
             console.log(nextX)
 
             if(i === originals.length - 1) {
-              tl.to(track, { y: 1500, duration: moveDuration, ease: "power4.inOut" });
-              tl.to(clonesA[0], { scale: scaleUp, duration: 1.5, ease: "power4.inOut" }, "+=0.1");
+              tl.to(track, { y: initialOffset + step * (originals.length - 1), duration: moveDuration, ease: "power4.inOut" }, "-=1.5");
+              tl.to(track, {y: initialOffset + step * originals.length, duration: moveDuration, ease: "power4.inOut" }, "-=1.5");
+              tl.to(clonesA[4], { scale: scaleUp, duration: 1.5, ease: "power4.inOut" }, "+=0.1");
             }
           });
 
-          tl.set(track, { y: initialOffset, duration: moveDuration });
+          tl.set(track, { y: initialOffset });
         }
         // -------------------------
         // MOBILE ANIMATION
@@ -171,11 +192,13 @@ const Carousel = forwardRef<HTMLDivElement>(function Carousel(_, ref) {
             }
 
             if(i === originals.length - 1) {
-              tl.to(track, { x: 65, duration: moveDuration, ease: "power4.inOut" });
+              tl.to(track, { x: initialOffset + step * (originals.length - 1), duration: moveDuration, ease: "power4.inOut" }, "-=1.5");
+              tl.to(track, { x: initialOffset + step * originals.length, duration: moveDuration, ease: "power4.inOut" }, "-=1.5");
+              tl.to(clonesA[4], { scale: scaleUp, duration: 1.5, ease: "power4.inOut" }, "+=0.1");
             }
           });
 
-          tl.set(track, { x: initialOffset, duration: moveDuration, ease: "power4.inOut" }, "-=1");
+          tl.set(track, { x: initialOffset });
         }
 
 

@@ -44,6 +44,7 @@
     height: 600px;
     max-width: 557px;
     width: 54.394vw;
+    overflow: scroll;
   }
 
   .track {
